@@ -1,0 +1,65 @@
+{{ 'faqs.css' | asset_url | stylesheet_tag }}
+<div class="faqs container container--md">
+  <div class="faqs-row">
+    <div class="faqs-left">
+      <p class="faqs-title">FAQ’s</p>
+      <h4 class="faqs-description">{{ section.settings.description }}</h4>
+    </div>
+    <div class="faqs-right">
+      <div class="faqs-accordion">
+        {%- for block in section.blocks -%}
+          {%- render 'accordion',
+            title: block.settings.title,
+            prose content: block.settings.prose_content -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "FAQ's Section",
+    "class": "faqs-section",
+    "disabled_on": {
+      "groups": ["header", "custom.overlay"]
+    },
+    "settings": [
+      {
+        "type": "inline_richtext",
+        "id": "description",
+        "label": "Enter description",
+        "default": "We’ve compiled some frequently asked questions (FAQs) specific to our subscriptions."
+      }
+    ],
+      "blocks": [
+    {
+      "type": "item",
+      "name": "Add new Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Enter Accordion Title"
+        },
+        {
+          "type": "textarea",
+          "id": "prose_content",
+          "label": "Enter Accordion Description",
+          "default": "Fitzroy Street is our signature blend and the house espresso at our original roastery & cafe in Fitzroy?"
+        }
+      ]
+    }
+  ],
+    "presets": [
+      {
+        "name": "FAQ's Section"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,92 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "links": {
+          "type": "links",
+          "settings": {
+            "menu_title": "Coffee",
+            "menu": "footer-coffee-mobile",
+            "show_desktop": false,
+            "show_mobile": true
+          }
+        },
+        "2bde541f-32f0-4459-9166-3aeba1d6dd92": {
+          "type": "links",
+          "settings": {
+            "menu_title": "Coffee",
+            "menu": "footer-coffee",
+            "show_desktop": true,
+            "show_mobile": false
+          }
+        },
+        "b27f73f6-bfb6-4293-b245-962a012532ca": {
+          "type": "links",
+          "settings": {
+            "menu_title": "",
+            "menu": "footer-empty",
+            "show_desktop": true,
+            "show_mobile": false
+          }
+        },
+        "3e63df94-655c-4214-b83e-8f146b9e5f17": {
+          "type": "links",
+          "settings": {
+            "menu_title": "Visit",
+            "menu": "footer-visit",
+            "show_desktop": true,
+            "show_mobile": true
+          }
+        },
+        "a25c4f95-b1e6-4130-bb96-dea26d6c8dcb": {
+          "type": "links",
+          "settings": {
+            "menu_title": "Learn",
+            "menu": "footer-learn",
+            "show_desktop": true,
+            "show_mobile": true
+          }
+        },
+        "584f7589-e789-419f-bf7f-caf1754b8667": {
+          "type": "links",
+          "settings": {
+            "menu_title": "About",
+            "menu": "footer-about",
+            "show_desktop": true,
+            "show_mobile": true
+          }
+        }
+      },
+      "block_order": [
+        "links",
+        "2bde541f-32f0-4459-9166-3aeba1d6dd92",
+        "b27f73f6-bfb6-4293-b245-962a012532ca",
+        "3e63df94-655c-4214-b83e-8f146b9e5f17",
+        "a25c4f95-b1e6-4130-bb96-dea26d6c8dcb",
+        "584f7589-e789-419f-bf7f-caf1754b8667"
+      ],
+      "settings": {
+        "message_1": "Freshly roasted to order",
+        "message_1_text": "<p>Sourced and roasted to create a full-bodied and satisfying blend<\/p>",
+        "message_2": "Free Australian shipping over $15",
+        "message_2_text": "<p>Sourced and roasted to create a full-bodied and satisfying blend<\/p>",
+        "subscription_header": "The Espresso Club™",
+        "subscription_text": "The Ultimate Home Coffee Subscription Bundle",
+        "button_link": "#",
+        "button_text": "Build your Subscription",
+        "newsletter_header": "Newsletter",
+        "newsletter_text": "Subscribe to receive updates, access to exclusive deals, and more.",
+        "tytext": "Thank you for signing up!",
+        "copyright_text": "2022 Industry Beans Limited",
+        "show_social_media": true,
+        "social_media": "social-media"
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

@@ -1,0 +1,123 @@
+<section
+  data-section-id="{{ section.id }}"
+  data-section-type="featured-collections2"
+  data-settings=''>
+
+
+  <div class="relitems">
+    <div class="relitems__wrap">
+
+      <div class="relitems__head">
+
+        <div class="relitems__title">{{ section.settings.title | escape }}</div>
+
+        <a href="{{ section.settings.collections.url }}" class="button--underlined">{{ section.settings.button_text | escape }}</a>
+      </div>
+
+      <div
+        class="relitems__body"
+        id="block-{{ block.id }}"
+        aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+        role="tabpanel"
+        {{ block.shopify_attributes }}>
+        <div class="swiper relitems__swiper">
+          <div class="swiper-wrapper">
+
+            {%- for block in section.blocks -%}
+              {%- assign product = all_products[block.settings.product] -%}
+              <div class='swiper-slide'>
+              
+                {%- assign should_reveal = false -%}
+
+                {%- if settings.stagger_products_apparition and forloop.first -%}
+                  {%- assign should_reveal = true -%}
+                {%- endif -%}
+
+                {%- render 'product-card', product: product, reveal: should_reveal, hide_product_information: false, block: block, collection: section.settings.collections -%}
+              </div>
+            {%- endfor -%}
+
+
+          </div>
+          <div class="swiper-button-next">
+            <svg
+              width="9"
+              height="15"
+              viewBox="0 0 9 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M1.33594 1.41016L7.58594 7.66016L1.33594 13.9102"
+                stroke="#454545"
+                stroke-width="1.25">
+            </svg>
+          </div>
+          <div class="swiper-button-prev">
+            <svg
+              width="9"
+              height="15"
+              viewBox="0 0 9 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"><path
+                d="M7.66406 1.41016L1.41406 7.66016L7.66406 13.9102"
+                stroke="#454545"
+                stroke-width="1.25" /></svg>
+          </div>
+          <div class="swiper-scrollbar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+{%- capture hack -%}
+  {%- comment -%}This is just an ugly hack to make those variables appear as part of the theme editor in the General Settings{%- endcomment -%}
+  {% if section.settings.layout_mode == 'grid' %}
+    {{ settings.product_list_horizontal_spacing }},{{ settings.product_list_vertical_spacing }}{% endif %}
+{%- endcapture -%}
+
+{% schema %}
+  {
+    "name": "Product Carousel",
+    "class": "featured-collection-section shopify-section--bordered",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Header",
+        "default": "Product Carousel"
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Collections link text",
+        "default": "Shop all"
+      }, {
+        "type": "collection",
+        "id": "collections",
+        "label": "Collections link"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "product",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "category": "Product Carousel",
+        "name": "Product Carousel",
+        "settings": {},
+        "blocks": []
+      }
+    ]
+  }
+{% endschema %}

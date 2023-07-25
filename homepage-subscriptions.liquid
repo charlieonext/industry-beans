@@ -1,0 +1,458 @@
+<div class="homepage_subscriptions_wrap">
+  <div class="homepage_subscriptions_content">
+    <div class="homepage_subscriptions_img">
+      {%- if section.settings.cs_image_bg != blank -%}
+        <picture>
+          {%- assign sizes = '(max-width: 699px) 100vw, 50vw' -%}
+          {{- section.settings.cs_image_bg | image_url: width: section.settings.cs_image_bg.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200' -}}
+        </picture>
+      {%- else -%}
+        {{- 'lifestyle-1' | placeholder_svg_tag: 'placeholder' -}}
+      {%- endif -%}
+    </div>
+    <div class="homepage_subscriptions_desc">
+      <div class="homepage_subscriptions_desc_wrap">
+        <h4>{{ section.settings.cs_tag }}</h4>
+        <h2>{{ section.settings.cs_header }}</h2>
+        <div>{{ section.settings.cs_content }}</div>
+      </div>
+    </div>
+    <div class="homepage_subscriptions_filters">
+        <div class="homepage_subscriptions_filters_list" data-weight-total="0">
+            {% if section.settings.cs_question1 != blank and section.settings.cs_answers1 != blank %}
+                {% assign i = 1 %}
+                <div class="single_homepage_subscriptions_filter" data-weight-item="0">
+                    <div class="single_homepage_subscriptions_header{% if i == 1 %} active{% endif %}">
+                        {{ section.settings.cs_question1 }}
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="16" height="16" fill="white" />
+                        <path d="M13 5L8 10L3 5" stroke="#454545" />
+                        </svg>
+                    </div>
+                    <div class="single_homepage_subscriptions_content{% if i == 1 %} active{% endif %}">
+                        <ul class="single_homepage_subscriptions_list">
+                        {%- assign cs_answers1_handle = section.settings.cs_answers1 | default: '' -%}
+                        {%- assign cs_answers1 = linklists[cs_answers1_handle] -%}
+                        {%- for link in cs_answers1.links -%}
+                            <li>
+                                <label class="single_filter" 
+                                    {% if forloop.last == true %}
+                                        data-weight="0"
+                                    {% else %}
+                                        data-weight="{{ forloop.index }}"
+                                    {% endif %}
+                                    >
+                                    <input
+                                    type="radio"
+                                    name="coffee_filter_{{i}}"
+                                    class="homepage_subscriptions_filter"
+                                    value="{{ link.title | handle }}"
+                                    >
+                                    <span class="checkbox_content">
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                            <circle cx="7" cy="7" r="6.5" stroke="#7D7D7D" />
+                                            <circle class="check" cx="7" cy="7" r="2" fill="#454545" />
+                                        </svg>
+                                        <span class="checkbox_text">{{ link.title | escape }}</span>
+                                    </span>
+                                </label>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+            {% if section.settings.cs_question2 != blank and section.settings.cs_answers2 != blank %}
+                {% assign i = 2 %}
+                <div class="single_homepage_subscriptions_filter" data-weight-item="0">
+                    <div class="single_homepage_subscriptions_header{% if i == 1 %} active{% endif %}">
+                        {{ section.settings.cs_question2 }}
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="16" height="16" fill="white" />
+                        <path d="M13 5L8 10L3 5" stroke="#454545" />
+                        </svg>
+                    </div>
+                    <div class="single_homepage_subscriptions_content{% if i == 1 %} active{% endif %}" style="display:none;">
+                        <ul class="single_homepage_subscriptions_list">
+                        {%- assign cs_answers2_handle = section.settings.cs_answers2 | default: '' -%}
+                        {%- assign cs_answers2 = linklists[cs_answers2_handle] -%}
+                        {%- for link2 in cs_answers2.links -%}
+                            <li>
+                            <label class="single_filter" 
+                                {% if forloop.last == true %}
+                                    data-weight="0"
+                                {% else %}
+                                    data-weight="{{ forloop.index }}"
+                                {% endif %}
+                                >
+                                <input
+                                type="radio"
+                                name="coffee_filter_{{i}}"
+                                class="homepage_subscriptions_filter"
+                                value="{{ link2.title | handle }}"
+                                >
+                                <span class="checkbox_content">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <circle cx="7" cy="7" r="6.5" stroke="#7D7D7D" />
+                                    <circle class="check" cx="7" cy="7" r="2" fill="#454545" />
+                                </svg>
+                                <span class="checkbox_text">{{ link2.title | escape }}</span>
+                                </span>
+                            </label>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+            {% if section.settings.cs_question3 != blank and section.settings.cs_answers3 != blank %}
+                {% assign i = 3 %}
+                <div class="single_homepage_subscriptions_filter" data-weight-item="0">
+                    <div class="single_homepage_subscriptions_header{% if i == 1 %} active{% endif %}">
+                        {{ section.settings.cs_question3 }}
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="16" height="16" fill="white" />
+                        <path d="M13 5L8 10L3 5" stroke="#454545" />
+                        </svg>
+                    </div>
+                    <div class="single_homepage_subscriptions_content{% if i == 1 %} active{% endif %}" style="display:none;">
+                        <ul class="single_homepage_subscriptions_list">
+                        {%- assign cs_answers3_handle = section.settings.cs_answers3 | default: '' -%}
+                        {%- assign cs_answers3 = linklists[cs_answers3_handle] -%}
+                        {%- for link3 in cs_answers3.links -%}
+                            <li>
+                            <label class="single_filter" 
+                                {% if forloop.last == true %}
+                                    data-weight="0"
+                                {% else %}
+                                    data-weight="{{ forloop.index }}"
+                                {% endif %}
+                                >
+                                <input
+                                type="radio"
+                                name="coffee_filter_{{i}}"
+                                class="homepage_subscriptions_filter"
+                                value="{{ link3.title | handle }}"
+                                >
+                                <span class="checkbox_content">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <circle cx="7" cy="7" r="6.5" stroke="#7D7D7D" />
+                                    <circle class="check" cx="7" cy="7" r="2" fill="#454545" />
+                                </svg>
+                                <span class="checkbox_text">{{ link3.title | escape }}</span>
+                                </span>
+                            </label>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="homepage_subscriptions_button" style="display: none;">
+            <button class="button button_submit">{{ section.settings.button_submit }}</button>
+            <button class="button button_clear">{{ section.settings.button_clear }}</button>
+            <button class="button button_back">{{ section.settings.button_back }}</button>
+        </div>
+        {%- if section.blocks.size > 0 -%}
+        <div class="homepage_subscriptions_filters_result">
+            {% if section.settings.finding != blank %}
+                <div class="homepage_subscriptions_finding" style="display:none;">
+                    <div class="text">{{ section.settings.finding }}</div>
+                </div>
+            {% endif %}
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'tec' -%}
+                    {%- if block.settings.image != blank -%}
+                        <div class="homepage_subscriptions_result_item homepage_subscriptions_result_tec" style="display:none;">
+                            <div class="result_item_inner">
+                                <div class="result_item_image">
+                                    {%- if block.settings.tag != blank -%}
+                                        <div class="tag">{{ block.settings.tag }}</div>
+                                    {%- endif -%}
+                                    <picture>
+                                        {%- assign sizes = '(max-width: 699px) 100vw, 50vw' -%}
+                                        {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200' -}}
+                                    </picture>
+                                </div>
+                                {%- if block.settings.title != blank or block.settings.content != blank -%}
+                                <div class="result_item_content">
+                                    {%- if block.settings.title != blank -%}
+                                        <h4>{{ block.settings.title }}</h4>
+                                    {%- endif -%}
+                                    {%- if block.settings.content != blank -%}
+                                        <div class="description">{{ block.settings.content }}</div>
+                                    {%- endif -%}
+                                    {%- if block.settings.text != blank -%}
+                                        {% render 'button', content: block.settings.text, href: block.settings.url, style: block.settings.style, background: block.settings.background, text_color: block.settings.text_color, block: block %}
+                                    {%- endif -%}
+                                </div>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                    {%- endif -%}
+                {%- when 'cs' -%}
+                    {%- if block.settings.image != blank -%}
+                        <div class="homepage_subscriptions_result_item homepage_subscriptions_result_cs" style="display:none;">
+                            <div class="result_item_inner">
+                                <div class="result_item_image">
+                                    {%- if block.settings.tag != blank -%}
+                                        <div class="tag">{{ block.settings.tag }}</div>
+                                    {%- endif -%}
+                                    <picture>
+                                        {%- assign sizes = '(max-width: 699px) 100vw, 50vw' -%}
+                                        {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200' -}}
+                                    </picture>
+                                </div>
+                                {%- if block.settings.title != blank or block.settings.content != blank -%}
+                                <div class="result_item_content">
+                                    {%- if block.settings.title != blank -%}
+                                        <h4>{{ block.settings.title }}</h4>
+                                    {%- endif -%}
+                                    {%- if block.settings.content != blank -%}
+                                        <div class="description">{{ block.settings.content }}</div>
+                                    {%- endif -%}
+                                    {%- if block.settings.text != blank -%}
+                                        {% render 'button', content: block.settings.text, href: block.settings.url, style: block.settings.style, background: block.settings.background, text_color: block.settings.text_color, block: block %}
+                                    {%- endif -%}
+                                </div>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                    {%- endif -%}
+              {%- endcase -%}
+            {%- endfor -%}
+        </div>
+        {%- endif -%}
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Homepage Subscriptions",
+    "settings": [
+      {
+        "type": "text",
+        "id": "cs_tag",
+        "label": "Tag"
+      },
+      {
+        "type": "text",
+        "id": "cs_header",
+        "label": "Header"
+      },
+      {
+        "type": "richtext",
+        "id": "cs_content",
+        "label": "Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "cs_image_bg",
+        "label": "Image Desktop"
+      },
+      {
+        "type": "image_picker",
+        "id": "cs_image_bg_mobile",
+        "label": "Image Mobile"
+      },
+      {
+        "type": "text",
+        "id": "cs_question1",
+        "label": "Question 1"
+      },
+      {
+        "type": "link_list",
+        "id": "cs_answers1",
+        "label": "Answers 1"
+      },
+      {
+        "type": "text",
+        "id": "cs_question2",
+        "label": "Question 2"
+      },
+      {
+        "type": "link_list",
+        "id": "cs_answers2",
+        "label": "Answers 2"
+      },
+      {
+        "type": "text",
+        "id": "cs_question3",
+        "label": "Question 3"
+      },
+      {
+        "type": "link_list",
+        "id": "cs_answers3",
+        "label": "Answers 3"
+      },
+      {
+        "type": "text",
+        "id": "button_submit",
+        "label": "Button submit",
+        "default": "Submit"
+      },
+      {
+        "type": "text",
+        "id": "button_clear",
+        "label": "Button clear all",
+        "default": "Clear All"
+      },
+      {
+        "type": "text",
+        "id": "button_back",
+        "label": "Button back",
+        "default": "Back to answers"
+      },
+      {
+        "type": "text",
+        "id": "finding",
+        "label": "Finding",
+        "default": "Finding your perfect coffee subscription..."
+      }
+    ],
+    "blocks": [
+        {
+            "type": "tec",
+            "name": "Sub Quiz Result - TEC",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "tag",
+                    "label": "Tag",
+                    "default": "Recommended"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "The Espresso Club™"
+                },
+                {
+                    "type": "inline_richtext",
+                    "id": "content",
+                    "label": "Content",
+                    "default": "Start making café quality coffee at home,"
+                },
+                {	
+                    "type": "select",	
+                    "id": "style",	
+                    "label": "t:global.text.style",
+                    "options": [	
+                    {	
+                        "value": "outline",	
+                        "label": "t:global.text.button_style_options.outline"
+                    },	
+                    {	
+                        "value": "solid",
+                        "label": "t:global.text.button_style_options.solid"
+                    }	
+                    ],	
+                    "default": "solid"
+                },	
+                {	
+                    "type": "text",	
+                    "id": "text",	
+                    "label": "t:global.text.text",
+                    "default": "Button text"	
+                },	
+                {	
+                    "type": "url",	
+                    "id": "url",	
+                    "label": "t:global.text.link"
+                },	
+                {	
+                    "type": "color",	
+                    "id": "background",	
+                    "label": "t:global.colors.background"
+                },	
+                {	
+                    "type": "color",	
+                    "id": "text_color",	
+                    "label": "t:global.text.text"
+                }
+            ]
+        },
+        {
+            "type": "cs",
+            "name": "Sub Quiz Result - CS",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "tag",
+                    "label": "Tag",
+                    "default": "Recommended"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "Coffee Subscriptions"
+                },
+                {
+                    "type": "inline_richtext",
+                    "id": "content",
+                    "label": "Content",
+                    "default": "Never run out of coffee again"
+                },
+                {	
+                    "type": "select",	
+                    "id": "style",	
+                    "label": "t:global.text.style",
+                    "options": [	
+                    {	
+                        "value": "outline",	
+                        "label": "t:global.text.button_style_options.outline"
+                    },	
+                    {	
+                        "value": "solid",
+                        "label": "t:global.text.button_style_options.solid"
+                    }	
+                    ],	
+                    "default": "solid"
+                },	
+                {	
+                    "type": "text",	
+                    "id": "text",	
+                    "label": "t:global.text.text",
+                    "default": "Button text"	
+                },	
+                {	
+                    "type": "url",	
+                    "id": "url",	
+                    "label": "t:global.text.link"
+                },	
+                {	
+                    "type": "color",	
+                    "id": "background",	
+                    "label": "t:global.colors.background"
+                },	
+                {	
+                    "type": "color",	
+                    "id": "text_color",	
+                    "label": "t:global.text.text"
+                }	
+            ]
+        }
+    ],
+    "presets": [
+      {
+        "category": "Homepage Subscriptions",
+        "name": "Homepage Subscriptions"
+      }
+    ]
+  }
+{% endschema %}

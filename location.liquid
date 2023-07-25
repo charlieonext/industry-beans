@@ -1,0 +1,126 @@
+<link rel="stylesheet" href="{{ 'location.css' | asset_url }}" media="print" onload="this.media='all'">
+<div class="container location-container container--xs">
+  <div class="left-content">
+    {%- if section.settings.heading != blank -%}
+      <h3 class="location-heading">{{ section.settings.heading }}</h3>
+    {%- endif -%}
+    {%- if section.settings.description != blank -%}
+      <p class="location-description">{{ section.settings.description }}</p>
+    {%- endif -%}
+    <span class="line"></span>
+  </div>
+  <div class="right-content">
+    <div class="address">
+      {%- if section.settings.address != blank -%}
+        {{ section.settings.address }}
+      {%- endif -%}
+    </div>
+    <div class="work-time">
+      {%- if section.settings.work_time != blank -%}
+        {{ section.settings.work_time }}
+      {%- endif -%}
+    </div>
+    <div class="contact">
+      {%- if section.settings.email != blank -%}
+        <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+      {%- endif -%}
+      {%- if section.settings.phone != blank -%}
+        <a href="tel:{{ section.settings.phone }}"> {{ section.settings.phone }}</a>
+      {%- endif -%}
+    </div>
+    <div class="button-wrapper">
+      {% for block in section.blocks %}
+        {% assign item = block.settings %}
+        {%- if item.buttontext != blank -%}
+          <a
+            target="
+              {%- if item.open_link_in_new_tab == true -%}
+                _blank
+              {%- endif -%}
+            "
+            class="location-button button"
+            href="{{ item.buttonlink }}"
+          >
+            {{ item.buttontext }}
+          </a>
+        {%- endif -%}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Location ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Housed in an architecturally designed warehouse conversion in the backstreets of Fitzroy"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Industry Beans Fitzroy is HQ of the Industry Beans family, housed in an architecturally designed warehouse conversion in the backstreets of Fitzroy. Here, our largest coffee roastery sits alongside a café, coffee bar, retail shop and training facility. We're open 7 days a week, and we’d love to show you around."
+    },
+    {
+      "type": "richtext",
+      "id": "address",
+      "label": "Inline rich text"
+    },
+    {
+      "type": "richtext",
+      "id": "work_time",
+      "label": "Work time"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "Button",
+      "name": "Button",
+      "settings": [
+        {
+          "id": "buttontext",
+          "type": "text",
+          "label": "Button text",
+          "default": "Make A Booking"
+        },
+        {
+          "id": "buttonlink",
+          "type": "text",
+          "label": "Button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_link_in_new_tab",
+          "label": "Open link in new tab",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Location",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

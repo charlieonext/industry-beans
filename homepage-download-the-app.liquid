@@ -1,0 +1,113 @@
+<link rel="stylesheet" href="{{ 'homepage-download-the-app.css' | asset_url }}" media="print" onload="this.media='all'">
+<div class="container" >
+  <div style="background-color: {{ section.settings.background_color }}" class="download-wrapper {{ section.settings.image_alignment }}"> 
+    <div class="content"> 
+      <div class="text-wrapper"> 
+        {%- if section.settings.text_1 != blank -%}
+                    <p class="text_1">{{ section.settings.text_1 }}</p>
+        {%- endif -%}
+    
+        {%- if section.settings.text_2 != blank -%}
+                      <h4 class="text_2">{{ section.settings.text_2 }}</h4>
+        {%- endif -%}
+      </div>
+
+      <div class="button-wrapper"> 
+          {% for block in section.blocks %}
+          		{% assign item = block.settings %}
+                     {%- if item.buttontext != blank -%}
+                      <a class="download-button" href={{ item.buttonlink }}> 
+                         {%- if item.icon != blank -%}
+                           <img class="icon" src="{{ item.icon | img_url }}" >
+                         {%- endif -%}
+                      <span class="item-text">{{ item.buttontext }}</span></a>
+                    
+                         {%- endif -%}
+          {% endfor %}
+      </div>
+      
+    </div>
+    <div class="image-wrapper"> 
+       {%- if section.settings.image != blank -%}
+        <img class="section-image" src="{{ section.settings.image | image_url: width: 654 }}" >
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+      "name": "Downdload",
+      "settings": [
+        {
+        "type": "text",
+        "id": "text_1",
+        "label": "Text 1",
+        "default": "Download the App"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Text 2",
+          "default": "Download our app today lorem ipsum dolor"
+        }
+        ,
+          {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background color",
+          "default": "#F4F1EF"
+        },
+        {
+          "type": "select",
+          "id": "image_alignment",
+          "label": "Image alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Image"
+        }
+      ],
+      "max_blocks": 2,
+      "blocks": [
+                  {
+                    "type": "Button",
+                    "name": "Button",
+                    "settings": [
+                      {
+                        "id": "icon",
+                        "type": "image_picker",
+                        "label": "Icon"
+                      },
+                      {
+                        "id": "buttontext",
+                        "type": "text",
+                        "label": "Button text",
+                        "default": "Google Play"
+                      },
+                      {
+                        "id": "buttonlink",
+                        "type": "text",
+                        "label": "Button link",
+                        "default": "#"
+                      }
+                    ]
+                  }
+                ],
+      "presets": [{
+        "name": "Downdload",
+        "category": "Text"
+      }]
+  }
+{% endschema %}

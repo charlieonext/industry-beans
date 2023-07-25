@@ -1,0 +1,108 @@
+{{ 'our-location.css' | asset_url | stylesheet_tag }}
+<div class="our-location container container--md">
+  <div class="our-location-row">
+    {%- if section.settings.image_position == "image_right" -%}
+      <div class="our-location-left">
+          <div class="our-location-text">
+          <div class="our-location-title">{{ section.settings.title }}</div>
+          <div class="our-location-description">{{ section.settings.description }}</div>
+          <div class="our-location-sub-description">{{ section.settings.sub-description }}</div>
+          <a href="{{ section.settings.button_link }}" class="our-location-btn" target="_blank">{{ section.settings.button_text }}</a>
+        </div>
+      </div>
+      <div class="our-location-right">
+        <img src="{{ section.settings.image | img_url:'500x'}}" class="our-location-image"/>
+        <img src="{{ section.settings.mobile_image | img_url:'500x'}}" class="our-location-mobile_image"/>
+      </div>
+    {% else %}
+      <div class="our-location-left">
+        <img src="{{ section.settings.image | img_url:'500x'}}" class="our-location-image"/>
+        <img src="{{ section.settings.mobile_image | img_url:'500x'}}" class="our-location-mobile_image"/>
+      </div>
+      <div class="our-location-right">
+        <div class="our-location-text">
+          <p class="our-location-title">{{ section.settings.title }}</p>
+          <div class="our-location-description">{{ section.settings.description }}</div>
+          <div class="our-location-sub-description">{{ section.settings.sub-description }}</div>
+          <a href="{{ section.settings.button_link }}" class="our-location-btn" target="_blank">{{ section.settings.button_text }}</a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Our Location",
+    "class": "shopify-section--our-location",
+    "disabled_on": {
+      "groups": ["header", "custom.overlay"]
+    },
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Enter Tittle",
+        "default": "Our location"
+      },
+      {
+        "type": "richtext",
+        "id": "description",
+        "label": "Enter Description",
+        "default": "<h1>Lorem</h1>"
+      },
+      {
+        "type": "richtext",
+        "id": "sub-description",
+        "label": "Enter Sub Description",
+        "default": "<p>Lorem</p>"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Enter URL"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Enter Link text",
+        "default": "See Our Venues"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Upload Picture"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_image",
+        "label": "Upload Mobile Picture"
+      },
+      {
+        "type": "select",
+        "id": "image_position",
+        "label": "Image Position",
+        "options": [
+          {
+            "value": "image_left",
+            "label": "Left"
+          },
+          {
+            "value": "image_right",
+            "label": "Right"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Our Location"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

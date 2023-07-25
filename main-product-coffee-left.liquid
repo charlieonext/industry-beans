@@ -1,0 +1,84 @@
+{%- render 'product-coffee-info',
+  product: product,
+  center_basic_info: section.settings.center_basic_info,
+  has_content_below_gallery: has_content_below_gallery,
+  update_url: true,
+  class_div: 'product-coffee-left'
+-%}
+
+{% schema %}
+{
+  "name": "Product - Left content",
+  "class": "shopify-section--main-product left-content",
+  "tag": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "product_gallery",
+      "name": "t:sections.main_product.blocks.product_gallery.name",
+      "limit": 1
+    },
+    {
+      "type": "breadcrumbs",
+      "name": "t:sections.main_product.blocks.breadcrumbs.name",
+      "limit": 1
+    },
+    {
+      "type": "title",
+      "name": "t:sections.main_product.blocks.title.name",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "t:sections.main_product.blocks.price.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_taxes_notice",
+          "label": "t:sections.main_product.blocks.price.show_taxes_notice",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "t:sections.main_product.blocks.rating.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main_product.blocks.rating.instructions"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_empty",
+          "label": "t:sections.main_product.blocks.rating.show_if_no_reviews",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "rating_mode",
+          "label": "t:sections.main_product.blocks.rating.show_product_rating_as",
+          "options": [
+            {
+              "value": "rating",
+              "label": "t:sections.main_product.blocks.rating.show_product_rating_as_options.rating"
+            },
+            {
+              "value": "count",
+              "label": "t:sections.main_product.blocks.rating.show_product_rating_as_options.count"
+            }
+          ],
+          "default": "rating"
+        }
+      ]
+    },
+    {
+      "type": "product_tags",
+      "name": "t:sections.main_product.blocks.product_tags.name",
+      "limit": 1
+    }
+  ]
+}
+{% endschema %}

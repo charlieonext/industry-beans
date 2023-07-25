@@ -1,0 +1,321 @@
+{%- if template == 'customers/account' 
+ or template == 'customers/order' 
+ or template == 'customers/addresses' 
+ -%}
+  {%- assign add_top_margin = true -%}
+{%- else -%}
+  {%- assign add_top_margin = false -%}
+{%- endif -%}
+
+{%- if template == 'page.collections' -%}
+  {%- assign add_top_margin = false -%}
+{%- endif -%}
+
+<footer
+  id="section-{{ section.id }}"
+  class="Footer {% if section.blocks.size <= 2 %}Footer--center{% endif %} {% if add_top_margin %}Footer--withMargin{% endif %}"
+  role="contentinfo">
+  <div class="Container">
+    <div class="Footer__Top">
+      <div class="Footer__Left">
+        {%- if section.settings.message_1 != blank -%}
+          <div class="ft_header">
+            {{ section.settings.message_1 }}
+          </div>
+        {%- endif -%}
+        {%- if section.settings.message_1_text != blank -%}
+          <div class="ft_content">
+            {{ section.settings.message_1_text }}
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="Footer__Right">
+        {%- if section.settings.message_2 != blank -%}
+          <div class="ft_header">
+            {{ section.settings.message_2 }}
+          </div>
+        {%- endif -%}
+        {%- if section.settings.message_2_text != blank -%}
+          <div class="ft_content">
+            {{ section.settings.message_2_text }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="Footer__Center">
+      {%- if section.blocks.size > 0 -%}
+        <div class="Footer__Menu">
+          {%- for block in section.blocks -%}
+
+            {%- assign linklist = linklists[block.settings.menu] -%}
+            {%- if linklist != empty and block.settings.show_desktop == true -%}
+              <div class="Footer__Block Footer__Block--{{ block.type }} Footer__Block_nomobile">
+                <h2 class="Footer__Title Heading u-h6">{{ block.settings.menu_title | escape }}</h2>
+
+                <ul class="Linklist">
+                  {%- for link in linklist.links -%}
+                    <li class="Linklist__Item">
+                      <a href="{{ link.url }}" class="Link button--underlined ">{{ link.title | escape }}</a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+            {%- if linklist != empty and block.settings.show_mobile == true -%}
+              <div class="Footer__Block Footer__Block--{{ block.type }} Footer__Block_mobile">
+                <div class="faqs_question">
+                  <h2 class="Footer__Title Heading u-h6">{{ block.settings.menu_title | escape }}</h2>
+
+                  <ul class="Linklist">
+                    {%- for link in linklist.links -%}
+                      <li class="Linklist__Item">
+                        <a href="{{ link.url }}" class="Link button--underlined ">{{ link.title | escape }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+          {% comment %} <div class="animation_wrap"></div> {% endcomment %}
+        </div>
+      {%- endif -%}
+      <div class="Footer__Subscription">
+        <div class="Footer__Subscription_desc">
+          {%- if section.settings.subscription_header != blank -%}
+            <h2 class="Footer__Title Heading u-h6">{{ section.settings.subscription_header | escape }}</h2>
+          {%- endif -%}
+
+          {%- if section.settings.subscription_text != blank -%}
+            <div class="Footer__Content Rte">
+              {{ section.settings.subscription_text }}
+            </div>
+          {%- endif -%}
+        </div>
+        <a href="{{ section.settings.button_link }}" class="button--primary">
+          <span>{{- section.settings.button_text | escape -}}</span>
+        </a>
+      </div>
+      <div class="Footer__MobileBottom">
+        <div class="Footer__Social">
+          {%- if section.settings.show_social_media -%}
+            {%- assign social_media_handle = section.settings.social_media | default: 'social-media' -%}
+            {%- assign social_media = linklists[social_media_handle] -%}
+            {%- for link in social_media.links -%}
+              <li class="HorizontalList__Item">
+                <a
+                  href="{{ link.url }}"
+                  class="Link button--underlined "
+                  target="_blank"
+                  rel="noopener">
+                  {{ link.title | escape }}
+                </a>
+              </li>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+        <div class="Footer__Copyright">© {{ section.settings.copyright_text }}</div>
+      </div>
+      <div class="Footer__Newsletter_Form">
+        {% comment %} newsletter {% endcomment %}
+        <div class="Footer__Newsletter_Form_wrap">
+          {%- if section.settings.newsletter_header != blank -%}
+            <h2 class="Footer__Title Heading u-h6">{{ section.settings.newsletter_header | escape }}</h2>
+          {%- endif -%}
+
+          {%- if section.settings.newsletter_text != blank -%}
+            <div class="Footer__Content Rte">
+              {{ section.settings.newsletter_text }}
+            </div>
+          {%- endif -%}
+        </div>
+        {%- form 'customer', id: 'footer-newsletter', class: 'Footer__Newsletter Form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="Form__Alert Alert Alert--success">{{ section.settings.tytext }}</p>
+          {%- else -%}
+            {%- if form.errors -%}
+              <p class="Form__Alert Alert Alert--error">{{ form.errors.messages.email }}</p>
+            {%- endif -%}
+            <div class="form_btns">
+              <input
+                type="hidden"
+                name="contact[tags]"
+                value="newsletter">
+              <input
+                id="email"
+                type="email"
+                name="contact[email]"
+                class="Form__Input"
+                aria-label="{{ 'footer.newsletter.input' | t }}"
+                placeholder="{{ 'footer.newsletter.input' | t }}"
+                
+                required>
+              <button type="submit" class="Form__Submit" id="submit_nws">
+                <svg
+                  width="7"
+                  height="11"
+                  viewBox="0 0 7 11"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0.999999 0.441406L6 5.44141L1 10.4414" stroke="#454545" />
+                </svg>
+              </button>
+              <p id="result"></p>
+            </div>
+          {%- endif -%}
+        {%- endform -%}
+        {% comment %} end newsletter {% endcomment %}
+      </div>
+    </div>
+
+    <div class="Footer__Bottom">
+      <div class="Footer__Social">
+        {%- if section.settings.show_social_media -%}
+          {%- assign social_media_handle = section.settings.social_media | default: 'social-media' -%}
+          {%- assign social_media = linklists[social_media_handle] -%}
+          {%- for link in social_media.links -%}
+            <li class="HorizontalList__Item">
+              <a
+                href="{{ link.url }}"
+                class="button--underlined "
+                target="_blank"
+                rel="noopener">
+                {{ link.title | escape }}
+              </a>
+            </li>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      <div class="Footer__Copyright">© {{ section.settings.copyright_text }}</div>
+      <div class="Footer__JTB">
+        <a
+          href="https://www.jtbstudios.com.au/"
+          target="_blank"
+          rel="noopener noreferrer">Web development by JTB Studios</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "class": "shopify-section--footer",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Messages"
+      },
+      {
+        "type": "text",
+        "id": "message_1",
+        "label": "Left Message Header"
+      },
+      {
+        "type": "richtext",
+        "id": "message_1_text",
+        "label": "Left Message Text"
+      },
+      {
+        "type": "text",
+        "id": "message_2",
+        "label": "Right Message Header"
+      }, {
+        "type": "richtext",
+        "id": "message_2_text",
+        "label": "Right Message Text"
+      }, {
+        "type": "header",
+        "content": "Subscription"
+      }, {
+        "type": "text",
+        "id": "subscription_header",
+        "label": "Subscription Header",
+        "default": "The Espresso Club™"
+      }, {
+        "type": "text",
+        "id": "subscription_text",
+        "label": "Subscription Text",
+        "default": "The Ultimate Home Coffee Subscription Bundle"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Build your Subscription"
+      }, {
+        "type": "header",
+        "content": "Newsletter"
+      }, {
+        "type": "text",
+        "id": "newsletter_header",
+        "label": "Newsletter Header",
+        "default": "Newsletter"
+      }, {
+        "type": "text",
+        "id": "newsletter_text",
+        "label": "Newsletter Text",
+        "default": "Subscribe to receive updates, access to exclusive deals, and more."
+      }, {
+        "type": "text",
+        "id": "tytext",
+        "label": "Thank you message",
+        "default": "Thank you for signing up!"
+      }, {
+        "type": "header",
+        "content": "Copyright"
+      }, {
+        "type": "text",
+        "id": "copyright_text",
+        "label": "Copyright Text",
+        "default": "2022 Industry Beans Limited"
+      }, {
+        "type": "header",
+        "content": "Social Media"
+      }, {
+        "type": "checkbox",
+        "id": "show_social_media",
+        "label": "Show social media",
+        "default": true
+      }, {
+        "type": "link_list",
+        "id": "social_media",
+        "label": "Social Media Menu"
+      }
+
+    ],
+    "blocks": [
+      {
+        "type": "links",
+        "name": "Links",
+        "settings": [
+          {
+            "type": "text",
+            "id": "menu_title",
+            "label": "Menu Title"
+          }, {
+            "type": "link_list",
+            "id": "menu",
+            "label": "Menu",
+            "info": "This menu won't show dropdown items."
+          }, {
+            "type": "checkbox",
+            "id": "show_desktop",
+            "label": "Show on desktop version",
+            "default": true
+          }, {
+            "type": "checkbox",
+            "id": "show_mobile",
+            "label": "Show on mobile version",
+            "default": true
+          }
+        ]
+      }
+    ]
+
+  }
+{% endschema %}

@@ -1,0 +1,162 @@
+<section
+  class="Section Section--spacingNormal"
+  id="section-blog-posts"
+  data-section-type="article-list"
+  data-section-id="blog-posts">
+  <div class="container">
+    {%- if section.settings.subheading != blank or section.settings.title != blank -%}
+      <header class="SectionHeader SectionHeader--center">
+        {%- if section.settings.title != blank -%}
+          <h2 class="SectionHeader__Heading Heading u-h1">{{ section.settings.title | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.button_text != blank -%}
+          <div class="SectionHeader__Button">
+            <a href="{{ section.settings.button_link }}" class="button--underlined">{{ section.settings.button_text | escape }}</a>
+          </div>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <div class="ArticleListWrapper">
+      <div class="ArticleList article_wrap article__swiper swiper">
+
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+              {%- assign article = articles[block.settings.article] -%}
+              <article class="ArticleItem Grid__Cell swiper-slide" {% if block %}{{ block.shopify_attributes }}{% endif %}data-name="{{ article.title | handle  }}"data-time="{{ article.created_at | date: "%Y-%m-%d" }}">
+
+                {% if block.settings.new_image != blank %}
+                  <a
+                    class="ArticleItem__ImageWrapper AspectRatio AspectRatio--withFallback"
+                    style="background: url({{ block.settings.new_image | img_url: '1x1', format: 'jpg' }}); padding-bottom: 58%; --aspect-ratio: 1.7"
+                    href="{{ article.url }}">
+                        {{- block.settings.new_image | image_url: width: block.settings.new_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,800,1000,1200,1400,1600,1800,2000', class: 'blog-post-card__image w-full zoom-image group-hover:zoom' -}}
+                  </a>
+                {% else %}
+                  {%- if article.image != blank -%}
+                    {%- include 'image-size', sizes: '200,400,600,700,800,900,1000,1200', image: article.image -%}
+                    {%- assign image_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                    <a
+                      class="ArticleItem__ImageWrapper AspectRatio AspectRatio--withFallback"
+                      style="background: url({{ article.image | img_url: '1x1', format: 'jpg' }}); padding-bottom: 58%; --aspect-ratio: 1.7"
+                      href="{{ article.url }}">
+                        {{- article.image | image_url: width: article.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,800,1000,1200,1400,1600,1800,2000', class: 'blog-post-card__image w-full zoom-image group-hover:zoom' -}}
+                    </a>
+                  {%- endif -%}
+                {% endif %}
+
+                <a href="{{ article.url }}">
+                  <div class="ArticleItem__Content">
+                    {% assign blogTitle = article.handle | split: '/' %}
+                    <div class="ArticleItem__Category Heading u-h6 Text--subdued"></a><a href="/blogs/{{ blogTitle[0] }}/tagged/{{ article.tags.first | handle }}">{{ article.tags.first }}</a><span class="time_to_read">
+                        {% if block.settings.time_to_read != blank %}
+                          {{ block.settings.time_to_read }}
+                        {% else %}
+                          {{ article.metafields.custom.time_to_read }}{% endif %}
+                      </span><a href="{{ article.url }}">
+                    </div>
+                    <h2 class="ArticleItem__Title Heading u-h2">
+                      {% if block.settings.article_title != blank %}
+                        {{ block.settings.article_title }}
+                      {% else %}
+                        {{ article.title }}
+                      {% endif %}
+                    </h2>
+                    {% if block.settings.article_descripion != blank %}
+                      <p class="ArticleItem__Excerpt">{{ block.settings.article_descripion | strip_html | truncate: 150 }}</p>
+                    {% else %}
+                      <p class="ArticleItem__Excerpt">{{ article.excerpt_or_content | strip_html | truncate: 150 }}</p>
+                    {% endif %}
+                  </div>
+                </a>
+                      
+              </article>
+            
+          {%- endfor -%}
+        </div>
+        <div class="swiper-button-next">
+          <svg
+            width="9"
+            height="15"
+            viewBox="0 0 9 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M1.33594 1.41016L7.58594 7.66016L1.33594 13.9102"
+              stroke="#454545"
+              stroke-width="1.25" />
+          </svg>
+        </div>
+        <div class="swiper-button-prev">
+          <svg
+            width="9"
+            height="15"
+            viewBox="0 0 9 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"><path
+              d="M7.66406 1.41016L1.41406 7.66016L7.66406 13.9102"
+              stroke="#454545"
+              stroke-width="1.25" /></svg>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Blog posts",
+    "class": "shopify-section--bordered",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Blog posts"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text",
+        "default": "View all articles"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "article",
+        "name": "Article",
+        "settings": [
+          {
+            "type": "article",
+            "id": "article",
+            "label": "Article "
+          },
+          {
+            "type": "text",
+            "id": "article_title",
+            "label": "New Title"
+          },
+          {
+            "type": "textarea",
+            "id": "article_descripion",
+            "label": "New  Description"
+          },
+          {
+            "type": "text",
+            "id": "time_to_read",
+            "label": "New  Time To Read"
+          }, {
+            "type": "image_picker",
+            "id": "new_image",
+            "label": "New Image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

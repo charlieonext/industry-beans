@@ -1,0 +1,76 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "disabled": true,
+      "blocks": {
+        "message-1": {
+          "type": "message",
+          "settings": {
+            "text": "Announce something here"
+          }
+        }
+      },
+      "block_order": [
+        "message-1"
+      ],
+      "settings": {
+        "enable_sticky": false,
+        "autoplay": true,
+        "cycle_speed": 5,
+        "desktop_font_size": 11,
+        "mobile_font_size": 10,
+        "background": "#1c1c1c",
+        "text_color": "#ffffff"
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "f097da08-08e1-485a-be0b-acf43fc490e2": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "",
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "f097da08-08e1-485a-be0b-acf43fc490e2"
+      ],
+      "settings": {
+        "enable_sticky": true,
+        "show_separation_border": true,
+        "reduce_padding": false,
+        "logo": "shopify:\/\/shop_images\/logo.svg",
+        "logo_max_width": 180,
+        "logo_mobile_max_width": 100,
+        "menu": "mobile-menu",
+        "sidebar_menu": "",
+        "menu_open_trigger": "hover",
+        "enable_search": true,
+        "sidebar_text_font": "heading",
+        "sidebar_show_dividers": true,
+        "layout": "logo_center_navigation_inline",
+        "show_icons": false,
+        "show_country_selector": true,
+        "show_country_name": false,
+        "show_country_flag": true,
+        "show_locale_selector": false,
+        "transparent_header_text_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

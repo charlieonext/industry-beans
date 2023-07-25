@@ -1,0 +1,164 @@
+<div class="coffee_selector_wrap">
+  <div class="close_filters close_filters_js">
+    <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="20" height="20" transform="translate(0.5)" fill="white" />
+      <rect x="3" y="16.668" width="20.0345" height="1.1785" transform="rotate(-45 3 16.668)" fill="#454545" />
+      <rect x="3.83398" y="2.5" width="20.0345" height="1.1785" transform="rotate(45 3.83398 2.5)" fill="#454545" />
+    </svg>
+  </div>
+  <div class="coffee_selector_content">
+    <div class="coffee_selector_img">
+      {%- if settings.cs_image_bg != blank -%}
+        <picture>
+          {%- assign sizes = '(max-width: 699px) 100vw, 50vw' -%}
+          {{- settings.cs_image_bg | image_url: width: settings.cs_image_bg.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', reveal-on-scroll: section.settings.reveal_on_scroll -}}
+        </picture>
+      {%- else -%}
+        {{- 'lifestyle-1' | placeholder_svg_tag: 'placeholder' -}}
+      {%- endif -%}
+    </div>
+    <div class="coffee_selector_desc">
+      <div class="coffee_selector_desc_wrap">
+        <h4>{{ settings.cs_tag }}</h4>
+        <h2>{{ settings.cs_header }}</h2>
+        <div>{{ settings.cs_content }}</div>
+      </div>
+    </div>
+    <div class="coffee_selector_filters">
+      {% if settings.cs_question1 != blank and settings.cs_answers1 != blank %}
+        {% assign i = 1 %}
+        <div class="single_coffee_selector_filter">
+          <div class="single_coffee_selector_header{% if i == 1 %} active{% endif %}">
+            {{ settings.cs_question1 }}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="16" height="16" fill="white" />
+              <path d="M13 5L8 10L3 5" stroke="#454545" />
+            </svg>
+          </div>
+          <div class="single_coffee_selector_content{% if i == 1 %} active{% endif %}">
+            <ul class="single_coffee_selector_list">
+              {%- assign cs_answers1_handle = settings.cs_answers1 | default: '' -%}
+              {%- assign cs_answers1 = linklists[cs_answers1_handle] -%}
+              {%- for link in cs_answers1.links -%}
+                <li>
+                  <label class="single_filter">
+                    <input
+                      type="radio"
+                      name="coffee_filter_{{i}}"
+                      class="coffee_selector_filter"
+                      value="{{ link.title | handle }}"
+                    >
+                    <span class="checkbox_content">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <circle cx="7" cy="7" r="6.5" stroke="#7D7D7D" />
+                        <circle class="check" cx="7" cy="7" r="2" fill="#454545" />
+                      </svg>
+                      <span class="checkbox_text">{{ link.title | escape }}</span>
+                    </span>
+                  </label>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+      {% if settings.cs_question2 != blank and settings.cs_answers2 != blank %}
+        {% assign i = 2 %}
+        <div class="single_coffee_selector_filter">
+          <div class="single_coffee_selector_header{% if i == 1 %} active{% endif %}">
+            {{ settings.cs_question2 }}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="16" height="16" fill="white" />
+              <path d="M13 5L8 10L3 5" stroke="#454545" />
+            </svg>
+          </div>
+          <div class="single_coffee_selector_content{% if i == 1 %} active{% endif %}">
+            <ul class="single_coffee_selector_list">
+              {%- assign cs_answers2_handle = settings.cs_answers2 | default: '' -%}
+              {%- assign cs_answers2 = linklists[cs_answers2_handle] -%}
+              {%- for link2 in cs_answers2.links -%}
+                <li>
+                  <label class="single_filter">
+                    <input
+                      type="radio"
+                      name="coffee_filter_{{i}}"
+                      class="coffee_selector_filter"
+                      value="{{ link2.title | handle }}"
+                    >
+                    <span class="checkbox_content">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <circle cx="7" cy="7" r="6.5" stroke="#7D7D7D" />
+                        <circle class="check" cx="7" cy="7" r="2" fill="#454545" />
+                      </svg>
+                      <span class="checkbox_text">{{ link2.title | escape }}</span>
+                    </span>
+                  </label>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+      {% if settings.cs_question3 != blank and settings.cs_answers3 != blank %}
+        {% assign i = 3 %}
+        <div class="single_coffee_selector_filter">
+          <div class="single_coffee_selector_header{% if i == 1 %} active{% endif %}">
+            {{ settings.cs_question3 }}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="16" height="16" fill="white" />
+              <path d="M13 5L8 10L3 5" stroke="#454545" />
+            </svg>
+          </div>
+          <div class="single_coffee_selector_content{% if i == 1 %} active{% endif %}">
+            <ul class="single_coffee_selector_list">
+              {%- assign cs_answers3_handle = settings.cs_answers3 | default: '' -%}
+              {%- assign cs_answers3 = linklists[cs_answers3_handle] -%}
+              {%- for link3 in cs_answers3.links -%}
+                <li>
+                  <label class="single_filter">
+                    <input
+                      type="radio"
+                      name="coffee_filter_{{i}}"
+                      class="coffee_selector_filter"
+                      value="{{ link3.title | handle }}"
+                    >
+                    <span class="checkbox_content">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <circle cx="7" cy="7" r="6.5" stroke="#7D7D7D" />
+                        <circle class="check" cx="7" cy="7" r="2" fill="#454545" />
+                      </svg>
+                      <span class="checkbox_text">{{ link3.title | escape }}</span>
+                    </span>
+                  </label>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="view_items_wrap">
+        <div class="view_items close_filters_js">
+          View matches
+          <span class="coffee_selector_nr">(3)</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="16" height="16" fill="white" />
+            <path d="M13 5L8 10L3 5" stroke="#454545" />
+          </svg>
+        </div>
+        <div class="coffee_selector_clear"><span>Clear All</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Coffee Selector",
+    "presets": [
+      {
+        "category": "Coffee Selector",
+        "name": "Coffee Selector"
+      }
+    ]
+  }
+{% endschema %}

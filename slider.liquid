@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="{{ 'slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<script type="module" src="{{ 'slider.js' | asset_url }}"></script>
+<div class="container slider-container">
+    <!-- Slider main container -->
+  <div class="swiper">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      {% for block in section.blocks %}
+            {% assign item = block.settings %}
+                 {%- if item.image != blank -%}
+                    <div class="swiper-slide">
+                      <picture>
+                        {%- if item.mobile_image != blank -%}
+                              <source
+                                  media="(max-width: 767.98px)"
+                                  srcset="{{ item.mobile_image | image_url: width: 343 }}"
+                                  width="343"
+                              >
+                          {%- endif -%}
+                        
+                          {{- item.image | image_url: width: 1384 | image_tag: loading: 'lazy' -}}
+                      </picture>
+                   </div>
+                  {%- endif -%}
+      {% endfor %}
+    </div>
+  
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Slider",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "mobile_image",
+            "label": "Mobile image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Slider",
+        "category": "Text"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

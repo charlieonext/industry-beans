@@ -1,0 +1,41 @@
+{{ 'title-and-description.css' | asset_url | stylesheet_tag }}
+<div class="container">
+  <div class="row">
+    <div class="title">
+      {{ section.settings.title }}
+    </div>
+    <div class="description">
+      {{ section.settings.description }}
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Title and Description",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Enter Tittle",
+        "default": "Our Venues"
+      },
+      {
+        "type": "text",
+        "id": "description",
+        "label": "Enter Description",
+        "default": "Lorem ipsum dolor sit amet"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Title and Description"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
